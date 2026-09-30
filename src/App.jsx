@@ -1,99 +1,137 @@
-import { useId, useState } from "react";
+import React, { useId, useState } from "react";
 
-const App = () => {
-    const [formData, setFormData] = useState({
-        required: "",
-        maxLength: "",
-        minLength: "",
-        valLength: "",
-        maxRange: "",
-        minRange: "",
-        valRange: ""
-    });
-    const {required, maxLength, minLength, valLength, maxRange, minRange, valRange} = formData; //destructure
-    const handleChange = (event) => {
-        console.log(event);
-        const {name, value} = event.target;
-        setFormData({...formData,[name]:value})
-    }
-    const handleSubmit = (event) => {
-        event.preventDefault();
-    }
-    const reqId = useId();
-    const nameId = useId();
-    const rangeId = useId();
+const FormValidate = () => {
+  const [formData, setFormData] = useState({
+    required: "",
+    maxLength: "",
+    minLength: "",
+    valLength: "",
+    maxRange: "",
+    minRange: "",
+    valRange: "",
+  });
 
-    return(
-    
-    <form onSubmit={handleSubmit}>
-        <section>
-            <h1>Form validation</h1>
-        </section>
-        <section>
-            <label htmlFor={rangeId + "requiredRange"}>Required range: </label>
-            <div>
-                <input type="text"
-                id={rangeId + "requiredRange"}
-                name="required"
-                value={required}
-                onChange={handleChange} />
-            </div>
-        </section>
-        <section>
-            <label htmlFor={rangeId + "maxLength"}>Max Length: </label>
-            <div>
-                <input type="text"
-                id={rangeId + "maxLength"}
-                name="maxLength"
-                value={valLength}
-                onChange={handleChange} />
-            </div>
-        </section>
-        <section>
-            <label htmlFor={rangeId + "minLength"}>Min Length: </label>
-            <div>
-                <input type="text"
-                id={rangeId + "minLength"}
-                name="minLength"
-                value={valRange}
-                onChange={handleChange} />
-            </div>
-        </section>
-        <section>
-            <label htmlFor={rangeId + "lengthVal"}>Length value: </label>
-            <div>
-                <input type="text"
-                id={rangeId + "lengthVal"}
-                name="lengthVal"
-                value={maxRange}
-                onChange={handleChange} />
-            </div>
-        </section>
-        <section>
-            <label htmlFor={rangeId + "minRange"}>Min Range: </label>
-            <div>
-                <input type="text"
-                id={rangeId + "minRange"}
-                name="minRange"
-                value={minRange}
-                onChange={handleChange} />
-            </div>
-        </section>
-        <section>
-            <label htmlFor={rangeId + "rangeVal"}>Range Value: </label>
-            <div>
-                <input type="text"
-                id={rangeId + "rangeVal"}
-                name="valRange"
-                value={valRange}
-                onChange={handleChange} />
-            </div>
-        </section>
-        <section>
-            <button>Submit</button>
-        </section>
-    </form>
-    )
-}
+  const {required,maxLength,minLength,valLength,minRange,maxRange,valRange} = formData; //destructure state
 
-export default App;
+  //event(onChange)-->SBE
+   const handleChange = (event) => {
+    console.log(event);
+    const {name,value}=event.target // input field name and value
+    setFormData({...formData,[name]:value}) //Object spreading and computed property name
+    console.log(formData)
+  };
+
+  //event(onSubmit)-->SBE
+  const handleSubmit=(event)=>{
+    event.preventDefault()
+    console.log(formData)
+  }
+
+  const reqId = useId();
+  const nameId = useId();
+  const rangeId = useId();
+
+  return (
+
+      <form onSubmit={handleSubmit}>
+        <section>
+          <h1>Form validation</h1>
+        </section>
+        <section>
+          <label htmlFor={reqId}>Required : </label>
+          <div>
+            <input
+              type="text"
+              id={reqId}
+              name="required"
+              value={required}
+              onChange={handleChange}
+            />
+          </div>
+        </section>
+        <section>
+          <label htmlFor={nameId + "max"}>Maximum Length : </label>
+          <div>
+            <input
+              type="text"
+              id={nameId + "max"}
+              name="maxLength"
+              value={maxLength}
+              onChange={handleChange}
+            />
+          </div>
+        </section>
+        <section>
+          <label htmlFor={nameId + "min"}>Minimum Length : </label>
+          <div>
+            <input
+              type="text"
+              id={nameId + "min"}
+              name="minLength"
+              value={minLength}
+              onChange={handleChange}
+            />
+          </div>
+        </section>
+        <section>
+          <label htmlFor={nameId + "valLen"}>Value Length : </label>
+          <div>
+            <input
+              type="text"
+              id={nameId + "valLen"}
+              name="valLength"
+              value={valLength}
+              onChange={handleChange}
+            />
+          </div>
+        </section>
+        <section>
+          <label htmlFor={rangeId + "max"}>Maximum Range : </label>
+          <div>
+            <input
+              type="number"
+              id={rangeId + "max"}
+              name="maxRange"
+              value={maxRange}
+              onChange={handleChange}
+            />
+          </div>
+        </section>
+        <section>
+          <label htmlFor={rangeId + "min"}>Minimum Range : </label>
+          <div>
+            <input
+              type="number"
+              id={rangeId + "min"}
+              name="minRange"
+              value={minRange}
+              onChange={handleChange}
+            />
+          </div>
+        </section>
+        <section>
+          <label htmlFor={rangeId + "rangeVal"}>Range value : </label>
+          <div>
+            <input
+              type="number"
+              id={rangeId + "rangeVal"}
+              name="valRange"
+              value={valRange}
+              onChange={handleChange}
+            />
+          </div>
+        </section>
+        <section>
+          <button>SUBMIT</button>
+        </section>
+      </form>
+
+  );
+};
+
+export default FormValidate;
+
+//* SBE --> target -->1)name(keyname)  2)value(data)
+
+//! useId() --> hook --> generate the unique id on each call & each render
+//? const id = useId()
