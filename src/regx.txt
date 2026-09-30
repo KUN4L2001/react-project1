@@ -1,0 +1,9 @@
+let regexEmail = /\S+@\S+\.\S+/  
+
+let regexUrl = /^(?:http(s)?:\/\/)?[\w.-]+(?:\.[\w\.-]+)+[\w\-\._~:/?#[\]@!\$&'\(\)\*\+,;=.]+$/
+
+let regexDigits = /^[0-9]+$/
+
+let regexNumber = /^-?\d+(?:\.\d+)?$/
+
+let regexAlpha = /^[a-zA-Z0-9\s]+$/

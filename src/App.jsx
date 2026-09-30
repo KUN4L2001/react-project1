@@ -66,7 +66,7 @@ const FormValidate = () => {
 
       <form onSubmit={handleSubmit}>
         <section>
-          <h1>Form validation</h1>
+          <h1 className="text-3xl font-bold underline">Form validation</h1>
         </section>
         <section>
           <label htmlFor={reqId}>Required : </label>
