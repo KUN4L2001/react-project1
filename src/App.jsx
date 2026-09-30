@@ -21,10 +21,41 @@ const FormValidate = () => {
     console.log(formData)
   };
 
+  const [errors, setErrors] = useState({})
   //event(onSubmit)-->SBE
   const handleSubmit=(event)=>{
     event.preventDefault()
     console.log(formData)
+    const validate = {};
+
+    //validating "required" field
+    if(required === ""){
+        validate.required="This field is mandatory!!!"
+    }
+    console.log(maxLength)
+    //Validating "maxLength" field
+    if(maxLength === ""){
+        validate.maxLength="This field is mandatory!!!"
+        console.log(maxLength.length)
+    } else if(maxLength.length > 6){
+        validate.maxLength="Maximun letters must be 6!!!"
+    }
+    //Validating "minLength" field
+    if(minLength === ""){
+        validate.minLength="This field is mandatory!!!"
+    } else if(minLength.length < 6) {
+        validate.minLength="Minimum letters must be 6!!!"
+    }
+    //Validating "valLength" field
+    if(valLength === ""){
+        validate.valLength = "This field is mandatory!!!"
+    } else if(valLength.length < 6 || valLength.length > 12){
+        validate.valLength = "Letters must be between 6-12!!!"
+    }
+
+    console.log(validate)
+
+    setErrors(validate)
   }
 
   const reqId = useId();
@@ -48,6 +79,7 @@ const FormValidate = () => {
               onChange={handleChange}
             />
           </div>
+          <span>{errors.required}</span>
         </section>
         <section>
           <label htmlFor={nameId + "max"}>Maximum Length : </label>
@@ -60,6 +92,7 @@ const FormValidate = () => {
               onChange={handleChange}
             />
           </div>
+          <span>{errors.maxLength}</span>
         </section>
         <section>
           <label htmlFor={nameId + "min"}>Minimum Length : </label>
@@ -72,6 +105,7 @@ const FormValidate = () => {
               onChange={handleChange}
             />
           </div>
+          <span>{errors.minLength}</span>
         </section>
         <section>
           <label htmlFor={nameId + "valLen"}>Value Length : </label>
@@ -84,6 +118,7 @@ const FormValidate = () => {
               onChange={handleChange}
             />
           </div>
+          <span>{errors.valLength}</span>
         </section>
         <section>
           <label htmlFor={rangeId + "max"}>Maximum Range : </label>
@@ -96,6 +131,7 @@ const FormValidate = () => {
               onChange={handleChange}
             />
           </div>
+          <span>{errors.maxRange}</span>
         </section>
         <section>
           <label htmlFor={rangeId + "min"}>Minimum Range : </label>
@@ -108,6 +144,7 @@ const FormValidate = () => {
               onChange={handleChange}
             />
           </div>
+          <span>{errors.minRange}</span>
         </section>
         <section>
           <label htmlFor={rangeId + "rangeVal"}>Range value : </label>
@@ -120,6 +157,7 @@ const FormValidate = () => {
               onChange={handleChange}
             />
           </div>
+          <span>{errors.valRange}</span>
         </section>
         <section>
           <button>SUBMIT</button>
